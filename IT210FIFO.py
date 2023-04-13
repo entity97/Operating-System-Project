@@ -1,3 +1,7 @@
+#IT 210 Q5 - Page Replacement Algorithm
+#Created by: Divine Aluko - Adeolu Group 3
+#148618
+
 print("FIFO page replacement algorithm")
 
 

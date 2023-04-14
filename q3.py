@@ -24,8 +24,21 @@
 
 import numpy as np
 
-#prints the resource allocation matrix and available resources
 def print_resources(allocation, max, available):
+"""prints the resource allocation matrix and available resources
+
+    Args:
+        allocation (numpy.ndarray): The allocation matrix of shape (n,m) where n is the number of 
+            processees and m is the number of resources. 
+        max (numpy.ndarray): The maximum demand matrix of shape (n,m) where n is the number of
+            processes and m is the number or resources.
+        available (numpy.ndarray): The available resources vector of shape (m) where m is the
+            number of resources.
+     
+     Returns:
+        None.
+"""
+
     print("Resource allocation:")
     for i in range(allocation.shape[0]):
         print("P{} ".format(i), end='')
@@ -40,8 +53,22 @@ def print_resources(allocation, max, available):
         print("{} ".format(available[i]), end='')
     print("")
 
-#Define a function to check whether a process can finish execution of not
 def can_finish(process, allocation, max, available):
+"""checks if a process can finish execution by comparing its maximum resource needs to its 
+    current allocation and available resources.
+
+    Args:
+        processes (int): Index of the process being checked. 
+        allocation (numpy.ndarray): Array representing the current allocation of resources to
+            processes.
+        max (numpy.ndarray): Array representing the maximum resources needs of processes. 
+        available (numpy.ndarray): Array representing the currently available resources.
+     
+     Returns:
+        bool: True if the process can finish execution, i.e. its maximum process needs can be
+        satisfied with its current allocation and available resources, without leading to 
+        deadlock; False otherwise.
+"""
     for i in range(allocation.shape[1]):
         if max[process][i] - allocation[process][i] > available[i]:
             return False
@@ -49,6 +76,17 @@ def can_finish(process, allocation, max, available):
 
 #Define a function to detect whether deadlock is present or not
 def detect_deadlock(allocation, max, available):
+"""detects deadlock for the given example.
+
+    Args:
+        allocation (numpy.ndarray): Array representing the current allocation of resources to
+            processes.
+        max (numpy.ndarray): Array representing the maximum resources required by each process. 
+        available (numpy.ndarray): Array representing the currently available resources.
+     
+     Returns:
+        bool: True if deadlock is detected; False otherwise.
+"""  
     num_processes = allocation.shape[0]
     finished = np.zeros(num_processes, dtype=bool)
     found = False
